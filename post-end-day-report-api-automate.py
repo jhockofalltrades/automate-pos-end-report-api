@@ -47,8 +47,8 @@ class EndDayAPI:
 
         if token == False:
             return False
-        url = 'https://firstpos.online/pos2/backend_sendHourlyGTO?token='+token+'&manualgto=1'
-        r = requests.get(url, json={})
+        url = 'https://firstpos.online/pos2/generate_GTO_test'
+        r = requests.get(url, params={'token': token, 'manualgto': 1})
 
         print(r.text)
 
