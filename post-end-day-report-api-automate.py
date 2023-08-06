@@ -8,7 +8,7 @@ class EndDayAPI:
     userId = 482
     startDate = '2023-07-31 10:16:59'
     endDate = '2023-07-31 20:37:34'
-    userName = 'Manager'
+    name = 'Manager'
 
     def __init__(self, host, database, username, password) -> None:
         self.host = host
@@ -43,14 +43,28 @@ class EndDayAPI:
         import requests
         import json
 
-        token = self.login()
+        token = '169129403863067'
 
         if token == False:
             return False
         url = 'https://firstpos.online/pos2/generate_GTO_test'
-        r = requests.get(url, params={'token': token, 'manualgto': 1})
+        r = requests.get(url, params={
+            'token': token,
+            'manualgto': 1,
+            'host': self.host,
+            'database': self.database,
+            'username': self.username,
+            'password': self.password,
+            'merchantId': self.merchantId,
+            'outletId': self.outletId,
+            'userId': self.userId,
+            'endDate': self.endDate,
+            'startDate': self.startDate,
+            'name': self.name
+        })
 
-        print(r.text)
+        print(r.text.replace(
+            '{"status":0,"msg":"wrong api id"}{"status":0,"msg":"wrong api id"}', ''))
 
 
 api = EndDayAPI('23.108.103.27', 'zippbnpc_fnb',
